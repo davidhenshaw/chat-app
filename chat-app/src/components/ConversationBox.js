@@ -18,11 +18,21 @@ function ConversationBox(props) {
         setMessages( (curr) => [...curr, msg] );
     }
 
-    let conversation = messages.map( (msg, i) => <h3 key={i}>{msg}</h3>)
+    let conversation = messages.map( (msg, i) => <Message data={msg}/>)
 
     return (
         <div>
             {conversation}
+        </div>
+    )
+}
+
+function Message({data})
+{
+    return (
+        <div className="chat-bubble">
+            <h3>{data.name}: {data.content}</h3>
+            <p>{data.time}</p>
         </div>
     )
 }

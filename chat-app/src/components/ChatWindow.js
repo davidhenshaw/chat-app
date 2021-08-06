@@ -34,7 +34,7 @@ function ChatWindow() {
             <Form onSubmit={sendMessage}>
                 <Form.Control
                 type="input"
-                placeholder="message"
+                placeholder="Write a message!"
                 value={message}
                 onChange={onChange}
                 />
