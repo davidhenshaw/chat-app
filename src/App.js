@@ -6,8 +6,8 @@ import { Form } from 'react-bootstrap';
 import ChatWindow from './components/ChatWindow';
 import SocketProvider from './contexts/SocketProvider';
 
-//export const ENDPOINT = "http://localhost:4000";
-export const ENDPOINT = "http://18.119.6.36";
+//export const ENDPOINT = "https://localhost:4000";
+export const ENDPOINT = "https://18.119.6.36";
 
 function App() 
 {
