@@ -7,7 +7,7 @@ import ChatWindow from './components/ChatWindow';
 import SocketProvider from './contexts/SocketProvider';
 
 //export const ENDPOINT = "https://localhost:4000";
-export const ENDPOINT = "https://18.119.6.36";
+export const ENDPOINT = "https://chat.davidhenshaw.net";
 
 function App() 
 {
