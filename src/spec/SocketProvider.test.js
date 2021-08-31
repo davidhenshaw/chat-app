@@ -1,8 +1,10 @@
 import { render, screen } from "@testing-library/react";
+import { useEffect, useState } from "react";
 import { unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/cjs/react-dom-test-utils.production.min";
 
 import SocketProvider, {useSocket} from '../contexts/SocketProvider';
+import {ENDPOINT} from './../App.js';
 
 let container = null;
 beforeEach(() => {
@@ -33,4 +35,37 @@ test("useSocket provides a socket", () => {
   
   expect(screen.getByText("socket found")).not.toBeNull();
 
+})
+
+test("socket can ping server", async (done) => {
+
+  function SocketUser(props)
+  {
+    let socket = useSocket();
+    const [state, setState] = useState(null);
+
+    useEffect( ()=> {
+      socket.on('message', props.onPong);
+      socket.emit('ping');
+    })
+
+    return <> {state ? "success" : "failure"} </>;
+  }
+
+  const onPong = (message) => {
+    try{
+      expect(screen.getByText("success")).not.toBeNull();
+      done();
+    }
+    catch(error)
+    {
+      done(error);
+    }
+  }
+
+  let user = <SocketUser onPong={onPong}/>
+
+  render(<SocketProvider> {user} </SocketProvider>, container);
+  setTimeout(()=> done(), 2000);
+  
 })
