@@ -1,22 +1,40 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {io} from "socket.io-client";
-import { useEffect } from 'react';
-import { Form } from 'react-bootstrap';
-import ChatWindow from './components/ChatWindow';
-import SocketProvider from './contexts/SocketProvider';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
-//export const ENDPOINT = "https://localhost:4000";
-export const ENDPOINT = "https://chat.davidhenshaw.net";
+import ChatContainer from './containers/ChatContainer';
+import Signup from './Signup';
+
+export const ENDPOINT = "http://localhost:8080";
+//export const ENDPOINT = "https://chat.davidhenshaw.net";
 
 function App() 
 {
   return (
-    <div className="App">
-      <SocketProvider>
-        <ChatWindow />
-      </SocketProvider>
-    </div>
+    <Router>
+      <div className="App">
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+        </ul>
+
+        <Switch>
+          <Route path="/signup">
+            <Signup />
+          </Route>
+          <Route path="/">
+            <ChatContainer /> 
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

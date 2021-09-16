@@ -18,7 +18,7 @@ function ConversationBox(props) {
         setMessages( (curr) => [...curr, msg] );
     }
 
-    let conversation = messages.map( (msg, i) => <Message data={msg}/>)
+    let conversation = messages.map( (msg, i) => <Message data={msg} key={i}/>)
 
     return (
         <div>
