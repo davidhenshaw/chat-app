@@ -57,6 +57,8 @@ function Signup()
 
     return (
         <div>
+            <h1>Sign Up!</h1>
+            <h3>Just input a username and that's all you'll need!</h3>
             <Form onSubmit={handleSubmit}>
                 <Form.Control
                 type="input"
