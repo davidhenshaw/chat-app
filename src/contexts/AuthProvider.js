@@ -10,19 +10,18 @@ export function useAuth()
     return useContext(AuthContext);
 }
 
-function AuthProvider({children}) {
+export default function AuthProvider({children}) {
     const history = useHistory();
     const [isLoading, setLoading] = useState(true);
     const [authorized, setAuthorized] = useState(null);
-
-    let credentials = null;
+    const [socketUser, setSocketUser] = useState(null);
 
     useEffect(()=>{
 
-        credentials = {
+        let credentials = {
             user_id: localStorage.user_id
         }
-    
+
         if(!credentials.user_id)
         {
             history.push("/signup")
@@ -33,6 +32,7 @@ function AuthProvider({children}) {
             axios.post(`${ENDPOINT}/login`, credentials).then( (res) => {
                 if(res.status == 200)
                 {
+                    setSocketUser(res.data);
                     setAuthorized(true);
                 }
                 setLoading(false);
@@ -50,12 +50,10 @@ function AuthProvider({children}) {
 
     return (
         (authorized && !isLoading) ? 
-            <AuthContext.Provider value={credentials}>
+            <AuthContext.Provider value={socketUser}>
                 {children}
             </AuthContext.Provider>
         :
             <h1>Authorizing...</h1>
     )
 }
-
-export default AuthProvider

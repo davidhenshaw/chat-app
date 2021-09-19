@@ -9,6 +9,10 @@ function ConversationBox(props) {
         if(!socket) return;
 
         socket.on('message', (msg) => receiveMessage(msg))
+        socket.on('self-message', (msg) => {
+            msg['self'] = true;
+            receiveMessage(msg);
+        })
 
         return () => socket.off('message')
     }, [socket])
@@ -18,7 +22,15 @@ function ConversationBox(props) {
         setMessages( (curr) => [...curr, msg] );
     }
 
-    let conversation = messages.map( (msg, i) => <Message data={msg} key={i}/>)
+    let conversation = messages.map( (msg, i) => { 
+
+        return(
+            msg.self ?
+            <SelfMessage data={msg} key={i} />
+            :
+            <Message data={msg} key={i} />
+        )
+    })
 
     return (
         <div>
@@ -31,6 +43,16 @@ function Message({data})
 {
     return (
         <div className="chat-bubble">
+            <h3>{data.name}: {data.content}</h3>
+            <p>{data.time}</p>
+        </div>
+    )
+}
+
+function SelfMessage({data})
+{
+    return (
+        <div className="chat-bubble-self">
             <h3>{data.name}: {data.content}</h3>
             <p>{data.time}</p>
         </div>

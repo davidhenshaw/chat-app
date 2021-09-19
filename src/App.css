@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+.chat-bubble-self {
+  background-color: aqua;
+}

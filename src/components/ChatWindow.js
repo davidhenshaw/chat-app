@@ -40,7 +40,9 @@ function ChatWindow() {
                 />
                 <Button 
                 type="submit"
-                variant="primary">
+                variant="primary"
+                disabled={!message}
+                >
                     Send    
                 </Button>
             </Form>
