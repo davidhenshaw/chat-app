@@ -11,8 +11,8 @@ import {
 import ChatContainer from './containers/ChatContainer';
 import Signup from './Signup';
 
-export const ENDPOINT = "http://localhost:8080";
-//export const ENDPOINT = "https://chat.davidhenshaw.net";
+// export const ENDPOINT = "http://localhost:8080";
+export const ENDPOINT = "https://chat.davidhenshaw.net";
 
 function App() 
 {
